@@ -1,26 +1,95 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows ISO</title>
+    <style>
+        .reg-button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: alias;
+        }
+
+        .reg-button:hover {
+            background-color: red;
+        }
+
+        #opener-googledisk {
+            background-color: #ff0000;
+            /* Зеленый цвет */
+            color: rgb(0, 0, 0);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: grab ;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+
+        #opener-googledisk:hover {
+            background-color: #b32323;
+            cursor: alias ;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Windows ISO Google Disk download (Web Site Version 0.1)
-    </h1>
-    <img width: 10px; src="https://cf-vectorizer-live.s3.amazonaws.com/vectorized/2p4c9o5nyjFJ7dvFYIZJViZSDLa/2p4cFZFc6SbKRfiIhDbKPOrdqRI.svg" alt="Download ISO now">
-    <p>Тут можно найти сборки Windows. все сборки провереные на работоспособность</p>
-    <ul>
-<li> <b>на данный момент есть :</b> </li>
-<li> <em>Windows 1.0 (дискеты не требуются),
-    Windows 3.1 (дискеты в том числе),
-    Windows NT 4.0.
-</em>
-</li>
-    </ul>
-    <a href="https://drive.google.com/open?id=19qazdqQTtjf_oeuyDAQy6VLQR5kXJVkA&usp=drive_copy" target="_blank">все образы которые есть на данный момент</a><br>
-    <a href="mailto:NWHolstNBTweather@gmail.com">
-        надо добавить оброз? жми сюда </a>
-    </a>
+    <div id="registration" style="display: block;">
+        <h2>Регистрация</h2>
+        <input type="text" id="name" placeholder="Имя">
+        <input type="text" id="login" placeholder="Логин">
+        <input type="password" id="password" placeholder="Пароль">
+        <button class="reg-button" onclick="register()">Зарегистрироваться</button>
+    </div>
+    <div id="authorization" style="display: none;">
+        <h2>Авторизация</h2>
+        <input type="text" id="loginAuth" placeholder="Логин">
+        <input type="password" id="passwordAuth" placeholder="Пароль">
+        <button class="reg-button" onclick="authorize()">Войти</button>
+    </div>
+    <div id="profile" style="display: none;">
+        <h1>Windows ISO Google Disk download (Web Site Version 0.1)</h1>
+        <img src="https://cf-vectorizer-live.s3.amazonaws.com/vectorized/2p4c9o5nyjFJ7dvFYIZJViZSDLa/2p4cFZFc6SbKRfiIhDbKPOrdqRI.svg"
+            alt="Download ISO now" width="200">
+        <p>Тут можно найти сборки Windows. Все сборки проверены на работоспособность</p>
+        <form>
+            <button id="opener-googledisk" onclick="openLink()">Все сборки, которые есть на данный момент</button>
+    </div>
+    <script>
+        let users = {};
+
+        function register() {
+            const name = document.getElementById("name").value;
+            const login = document.getElementById("login").value;
+            const password = document.getElementById("password").value;
+            users[login] = { name, password };
+            alert("Регистрация прошла успешно!");
+            document.getElementById("registration").style.display = "none";
+            document.getElementById("authorization").style.display = "block";
+        }
+
+        function authorize() {
+            const login = document.getElementById("loginAuth").value;
+            const password = document.getElementById("passwordAuth").value;
+            if (users[login] && users[login].password === password) {
+                document.getElementById("profile").style.display = "block";
+                // Здесь вы можете отобразить имя пользователя, например, в элементе с id "userName"
+                document.getElementById("userName").textContent = "Добро пожаловать, " + users[login].name;
+                document.getElementById("authorization").style.display = "none";
+            } else {
+                alert("Попробуйте ещё раз!");
+            }
+        }
+
+        function openLink() {
+            window.open("https://drive.google.com/drive/folders/19qazdqQTtjf_oeuyDAQy6VLQR5kXJVkA?usp=sharing", "_blank"); // Added closing parenthesis
+        }
+    </script>
 </body>
+
 </html>
