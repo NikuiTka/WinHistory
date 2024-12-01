@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="background.css">
     <title>Windows ISO</title>
     <style>
         .reg-button {
@@ -21,44 +22,53 @@
 
         #opener-googledisk {
             background-color: #ff0000;
-            /* Зеленый цвет */
             color: rgb(0, 0, 0);
             padding: 15px 30px;
             border: none;
             border-radius: 5px;
-            cursor: grab ;
-            text-decoration: none;
+            cursor: alias;
+            text-decoration: aqua;
             font-family: Arial, sans-serif;
         }
 
         #opener-googledisk:hover {
             background-color: #b32323;
-            cursor: alias ;
         }
     </style>
 </head>
 
 <body>
     <div id="registration" style="display: block;">
-        <h2>Регистрация</h2>
+        <h2>Регестрация</h2>
+        <div margin="100px">
         <input type="text" id="name" placeholder="Имя">
+        </div>
+        <div margin="10px">
         <input type="text" id="login" placeholder="Логин">
+        </div>
+        <div margin="10px">
         <input type="password" id="password" placeholder="Пароль">
-        <button class="reg-button" onclick="register()">Зарегистрироваться</button>
+        </div>
+        <button class="reg-button" onclick="register()">Зарегистрироватся</button>
     </div>
     <div id="authorization" style="display: none;">
-        <h2>Авторизация</h2>
+        <h2>Логин</h2>
+        <div>
         <input type="text" id="loginAuth" placeholder="Логин">
+        </div>
+        <div>
         <input type="password" id="passwordAuth" placeholder="Пароль">
-        <button class="reg-button" onclick="authorize()">Войти</button>
+        </div>
+        <button class="reg-button" onclick="authorize()">Логин</button>
     </div>
     <div id="profile" style="display: none;">
-        <h1>Windows ISO Google Disk download (Web Site Version 0.1)</h1>
+        <h1>Windows ISO Google Disk download (Website Version 0.1)</h1>
         <img src="https://cf-vectorizer-live.s3.amazonaws.com/vectorized/2p4c9o5nyjFJ7dvFYIZJViZSDLa/2p4cFZFc6SbKRfiIhDbKPOrdqRI.svg"
-            alt="Download ISO now" width="200">
-        <p>Тут можно найти сборки Windows. Все сборки проверены на работоспособность</p>
+             alt="Download ISO now" width="200">
+        <p>Тут ты можешь найти все ISO. Они все проверены на роботоспособность.</p>
         <form>
-            <button id="opener-googledisk" onclick="openLink()">Все сборки, которые есть на данный момент</button>
+            <button id="opener-googledisk" onclick="openLink()">Все ISO которые есть на данный момент</button>
+        </form>
     </div>
     <script>
         let users = {};
@@ -68,7 +78,6 @@
             const login = document.getElementById("login").value;
             const password = document.getElementById("password").value;
             users[login] = { name, password };
-            alert("Регистрация прошла успешно!");
             document.getElementById("registration").style.display = "none";
             document.getElementById("authorization").style.display = "block";
         }
@@ -77,12 +86,12 @@
             const login = document.getElementById("loginAuth").value;
             const password = document.getElementById("passwordAuth").value;
             if (users[login] && users[login].password === password) {
-                document.getElementById("profile").style.display = "block";
-                // Здесь вы можете отобразить имя пользователя, например, в элементе с id "userName"
-                document.getElementById("userName").textContent = "Добро пожаловать, " + users[login].name;
+                document.getElementById("profile").style.display = "block"; document.getElementById("authorization").style.display = "none";
+                // Here you can display the username, for example, in an element with id "userName"
+                document.getElementById("userName").textContent = "Welcome, " + users[login].name;
                 document.getElementById("authorization").style.display = "none";
             } else {
-                alert("Попробуйте ещё раз!");
+                alert("Неверное имя пользователя, или пароль!");
             }
         }
 
@@ -90,6 +99,14 @@
             window.open("https://drive.google.com/drive/folders/19qazdqQTtjf_oeuyDAQy6VLQR5kXJVkA?usp=sharing", "_blank"); // Added closing parenthesis
         }
     </script>
-</body>
+    <form id="FeedBackForm" action="">
+        <input required name="Windows" placeholder="Ваша версия Windows" type="win">
+        <div class="g-recaptcha" data-sitekey="6LfHTL4fAAAAABtQLHfUMxvY_Nv0SRsvDxAAW9sl"></div>
+        <div class="text-danger" id="recaptchaError"></div>
 
+        <button>Отправить</button>
+    </form>
+</body>
+<script src='consolecfgletc.js'></script>
+<script src='functions.js'></script>
 </html>
